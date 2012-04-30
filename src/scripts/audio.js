@@ -1,7 +1,7 @@
 var audio = ( function() {
 
         var microphone = blackberry.media.microphone;
-        
+
         //this creates a new file but keeps the same name, so you can only play the most recent recording for {note name}
         //however you can go in and play audio from the files list, so all your previous recordings are still there.
         function check(newfile) {
@@ -17,16 +17,16 @@ var audio = ( function() {
 
         function record(filename) {
             try {
-                var la = microphone.record(blackberry.io.dir.appDirs.shared.music.path + '/' + newAudioFile(filename) + ".wav", recordSuccess, recordError);
+                var la = microphone.record(blackberry.io.dir.appDirs.shared.music.path + '/' + check(filename) + ".wav", recordSuccess, recordError);
             } catch(e) {
                 console.log("error initializing Recording: " + e.message);
             }
         }
 
         function stop() {
-            try{
-                microphone.stop();    
-            }catch(e){
+            try {
+                microphone.stop();
+            } catch(e) {
                 console.log("could not stop: " + e);
             }
         }
@@ -61,25 +61,31 @@ var audio = ( function() {
         }
 
         function list() {
-            var keysLen = localStorage.length,
-            audioList = {};
-            for(var i = 0; i < keysLen; i++){
+            var keysLen = localStorage.length, audioList = {};
+            for(var i = 0; i < keysLen; i++) {
                 audioList.int = {
-                "name" : localStorage.key(i),
-                "file" : localStorage.getItem(audioList.name)
+                    "name" : localStorage.key(i),
+                    "file" : localStorage.getItem(audioList.name)
                 };
             }
             return audioList;
         }
-        
+
         //returns an audio player element based on the name of the note you send in
-        function getAudio(name){
-            var audioFile = localStorage.getItem(name),
-            audioPlayer = document.createElement("audio");
+        function getAudio(name) {
+            var audioFile = localStorage.getItem(name), audioPlayer = document.createElement("audio");
             audioPlayer.src = audioFile;
             audioPlayer.controls = true;
-            return audioPlayer;            
+            return audioPlayer;
         }
+
+        return {
+            record: record,
+            stop: stop,
+            pause: pause,
+            listAudio: list,
+            getAudio: getAudio
+        };
 
     }());
 
