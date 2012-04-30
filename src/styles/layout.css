@@ -2,25 +2,14 @@
 @import "../scripts/libs/jquerymobile/plugins/jquery.swipeButton-1.2.css";
 
 
-#home .ui-header {
-	position: fixed;
-	left: 0;
-	right: 0;
-	top: 0;
-	z-index: 100;
-}
-
-#home {
-	padding-top: 56px;
+.ui-header-fixed,
+.ui-footer-fixed {
+	width: auto;
 }
 
 #notes-logo {
 	margin-top: -10px;
 	margin-bottom: -10px;
-}
-
-#home .ui-content .ui-listview {
-	margin: 0 -15px -15px -15px;
 }
 
 .ui-header .ui-title, .ui-footer .ui-title {
@@ -54,6 +43,8 @@
 	font-size: 18px;
 	line-height: 24px;
 	white-space: normal;
+	padding-top: 16px;
+	padding-bottom: 16px;
 }
 
 .preview-limit {
@@ -99,7 +90,7 @@
 	height: 80px;
 	left: 0;
 	right: 0;
-	z-index: 900;
+	z-index: 1150;
 	text-align: right;
 	-webkit-transition: all linear 300ms;
 	-webkit-box-sizing: border-box;
@@ -113,7 +104,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 800;
+	z-index: 1100;
 	pointer-events: none;
 	-webkit-transition: background-color linear 300ms;
 }
