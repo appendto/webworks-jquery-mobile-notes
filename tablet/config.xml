@@ -27,7 +27,10 @@
         <feature id="blackberry.system.event" />
         <feature id="blackberry.ui.dialog" />
         <feature id="blackberry.utils" />
-    </access>
+        <feature id="blackberry.io.file" />
+		<feature id="blackberry.io.dir" />	
+		<feature id="blackberry.media.microphone" />
+	</access>
 
     <rim:permissions>
         <rim:permit>access_shared</rim:permit>
