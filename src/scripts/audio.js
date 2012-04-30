@@ -63,7 +63,7 @@ var audio = ( function() {
         function list() {
             var keysLen = localStorage.length, audioList = {};
             for(var i = 0; i < keysLen; i++) {
-                audioList.int = {
+                audioList.id = {
                     "name" : localStorage.key(i),
                     "file" : localStorage.getItem(audioList.name)
                 };
