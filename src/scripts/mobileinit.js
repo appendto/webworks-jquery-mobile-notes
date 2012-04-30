@@ -4,7 +4,8 @@ $( document ).bind( "mobileinit", function () {
 
 	$.extend( $.mobile, {
 		// Settings go here
-		defaultPageTransition: "none"
+		defaultPageTransition: "none",
+		pushStateEnabled: false
 	});
 
 });

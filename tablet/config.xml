@@ -42,7 +42,7 @@
 
 
     <!-- If you need to lock it to a certain orientaion -->
-    <!-- <rim:orientation mode="landscape"/> -->
+    <rim:orientation mode="landscape"/>
 
     <!-- This allows us to develop without redeploying the application -->
     <content src="http://10.0.1.20:9000/index.html"/>

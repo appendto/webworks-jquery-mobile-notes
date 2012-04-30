@@ -1,8 +1,9 @@
-(function( $ ){
+(function( app, $ ){
 
 // Handle the preview sizes (no storage yet)
 var previewSizes = "preview-less preview-average preview-more",
-	$html = $( "html" );
+	$html = $( "html" ),
+	notesView, newNoteView;
 
 $html.on( "change", ".preview-size", function ( e ) {
 	var value = $( this ).find( ":checked" ).val();
@@ -37,6 +38,41 @@ $( document ).ready( function () {
 	$( "#menu [data-role='button']" ).button();
 });
 
+$html.on( "pageinit", "#home", function () {
+	notesView = new app.NotesView({
+		el: this,
+		collection: app.notes
+	});
+});
+
+$html.on( "pagebeforeshow", "#home", function () {
+	app.notes.fetch();
+});
+
+$html.on( "pageinit", "#new-note", function () {
+	newNoteView = new app.NewNoteView({
+		el: this,
+		collection: app.notes
+	});
+});
+
+$html.on( "pagebeforechange", function ( e, data ) {
+	var page, url;
+	if ( typeof data.toPage === "string" ) {
+		url = $.mobile.path.parseUrl( data.toPage );
+
+		if ( url.directory === "/notes/" ) {
+			page = new app.NoteView({
+				model: app.notes.get( url.filename )
+			});
+			console.log( page );
+			data.toPage = page.$el;
+		}
+	}
+});
+
+// app.notes.fetch();
 
 
-}( jQuery ));
+
+}( window.notesapp = window.notesapp || {}, jQuery ));

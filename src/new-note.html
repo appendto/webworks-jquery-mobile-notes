@@ -2,26 +2,24 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
 	<title>New Note</title> 
-	<link rel="stylesheet" href="/styles/layout.css" />
-	<script src="/scripts/libs/jquery-1.7.1.js"></script>
-	<script src="/scripts/mobileinit.js"></script>
-	<script src="/scripts/libs/jquerymobile/jquery.mobile-1.1.0.js"></script>
-	<script src="/scripts/app.js"></script>
 </head> 
 
 <body> 
 
-<div id="new" data-role="page">
+<div id="new-note" data-role="page">
 	<div data-role="header">
 		<a data-rel="back">Cancel</a>
 		<h1>New Note</h1>
-		<a>Done</a>
-	</div><!-- /header -->
+		<a class="done">Done</a>
+	</div>
 	<div data-role="content">
-		
+		<form id="new-note-form" data-ajax="false">
+			<fieldset>
+				<label for="note-text" class="ui-hidden-accessible">Note</label>
+				<textarea id="note-text" rows="30" cols="80"></textarea>
+			</fieldset>
+		</form>
 	</div>
 </div>
 

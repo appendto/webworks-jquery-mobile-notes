@@ -1,4 +1,5 @@
 @import "../scripts/libs/jquerymobile/jquery.mobile-1.1.0.css";
+@import "../scripts/libs/jquerymobile/plugins/jquery.swipeButton-1.2.css";
 
 
 #home .ui-header {
@@ -28,6 +29,11 @@
 
 .ui-header .ui-btn-inner, .ui-footer .ui-btn-inner, .ui-mini .ui-btn-inner {
 	font-size: 18px;
+}
+
+.ui-content {
+	font-size: 18px;
+	line-height: 24px;
 }
 
 .ui-btn-text {
