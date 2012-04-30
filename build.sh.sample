@@ -1,0 +1,34 @@
+current_dir=$(dirname "$0")
+[[ $current_dir =~ ^/ ]] || current_dir=$PWD/$current_dir
+
+# BB SDK Root
+bb_root=/Developer/SDKs/Research\ In\ Motion/BlackBerry\ WebWorks\ SDK\ for\ TabletOS\ 2.2.0.5/bbwp
+
+# IP of the device on the network
+# bb_ip=10.0.0.40
+bb_ip=169.254.0.1
+
+# Device Password
+bb_password=a
+
+# Application Short Name
+bb_app=notesapp
+
+bb_app_zip=$current_dir/build/$bb_app".zip"
+bb_app_bar=$current_dir/build/bin/$bb_app".bar"
+
+echo "Removing Build Directory…"
+rm -Rf $current_dir/build
+
+echo "Zipping up application…"
+mkdir $current_dir/build
+
+cd $current_dir/tablet
+zip -r $bb_app_zip . -i *.css *.html *.jpg *.jpeg *.png *.js *.xml images/*.png
+
+echo "Building "$bb_app".bar…"
+
+"$bb_root/bbwp" "$bb_app_zip" -v -d
+
+echo "Installing BlackBerry Application…"
+"$bb_root/blackberry-tablet-sdk/bin/blackberry-deploy" -installApp -device $bb_ip -password $bb_password -package "$bb_app_bar"

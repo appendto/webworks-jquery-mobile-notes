@@ -1,0 +1,122 @@
+@import "../scripts/libs/jquerymobile/jquery.mobile-1.1.0.css";
+
+
+#home .ui-header {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 100;
+}
+
+#home {
+	padding-top: 56px;
+}
+
+#notes-logo {
+	margin-top: -10px;
+	margin-bottom: -10px;
+}
+
+#home .ui-content .ui-listview {
+	margin: 0 -15px -15px -15px;
+}
+
+.ui-header .ui-title, .ui-footer .ui-title {
+	font-size: 20px;
+}
+
+.ui-header .ui-btn-inner, .ui-footer .ui-btn-inner, .ui-mini .ui-btn-inner {
+	font-size: 18px;
+}
+
+.ui-btn-text {
+	padding: 0 10px;
+}
+
+.ui-bar {
+	padding-top: 0.8em;
+	padding-bottom: 0.8em;
+}
+
+.ui-header .ui-btn-icon-left .ui-icon, .ui-footer .ui-btn-icon-left .ui-icon, .ui-mini.ui-btn-icon-left .ui-icon, .ui-mini .ui-btn-icon-left .ui-icon {
+	left: 12px;
+}
+
+.ui-li .ui-btn-text a.ui-link-inherit {
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 24px;
+	white-space: normal;
+}
+
+.preview-limit {
+	display: block;
+	font-size: 18px;
+	line-height: 24px;
+	overflow: hidden;
+}
+
+.preview-less .preview-limit {
+	max-height: 24px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.preview-average .preview-limit {
+	max-height: 72px;
+}
+
+.preview-more .preview-limit {
+	max-height: 240px;
+}
+
+.ui-li-has-arrow .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-arrow  {
+	padding-right: 45px;
+}
+
+.center-actions {
+	text-align: center;
+}
+
+	.center-actions .preview-size {
+		display: inline-block;
+	}
+
+.right-actions {
+	text-align: right;
+}
+
+#menu {
+	position: fixed;
+	top: -80px;
+	height: 80px;
+	left: 0;
+	right: 0;
+	z-index: 900;
+	text-align: right;
+	-webkit-transition: all linear 300ms;
+	-webkit-box-sizing: border-box;
+	-webkit-transform: translateY(0);
+}
+
+#menu-overlay {
+	background-color: rgba(0,0,0,0.0);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 800;
+	pointer-events: none;
+	-webkit-transition: background-color linear 300ms;
+}
+
+.show-menu #menu {
+	-webkit-transform: translateY(80px);
+}
+
+.show-menu #menu-overlay {
+	background-color: rgba(0,0,0,0.5);
+	pointer-events: all;
+}
