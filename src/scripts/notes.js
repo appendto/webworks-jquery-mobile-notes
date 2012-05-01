@@ -11,56 +11,46 @@ Note = Backbone.Model.extend({
 	defaults: {
 		text: "",
 		audio: ""
-	},
-
-	save: function () {
-		if ( this.isNew() ) {
-			this.set( "created_at", Date.now() );
-		}
-		// call the "super" method
-		Backbone.Model.prototype.save.apply( this, arguments );
 	}
 });
 
 // Collection
 Notes = Backbone.Collection.extend({
-	localStorage: new Backbone.LocalStorage("Notes"),
+	localStorage: new Backbone.LocalStorage( "Notes" ),
 	model: Note,
 	parse: function ( items ) {
-		// Sort these items
-		items.sort( function ( a, b ) {
-			var aCreated = a.created_at,
-				bCreated = b.created_at;
-
-			if ( aCreated === bCreated ) {
-				return 0;
-			}
-
-			return aCreated > bCreated ? -1 : 1;
-		});
-
-		return items;
+		return items.reverse();
 	}
 });
 
 // NoteView
 NoteView = Backbone.View.extend({
 	tagName: "div",
-		initialize: function () {
-		this.$el.attr( "data-role", "page" );
-		this.template = _.template( $( "#note-view-template" ).html() );
-		this.$el.appendTo( document.body );
+
+	templateId: "#note-view-template",
+
+	attributes: {
+		"data-role": "page"
+	},
+	
+	initialize: function () {
+		// Cache the template
+		this.template = _.template( $( this.templateId ).html() );
+
+		// Render
 		this.render();
 	},
 
 	render: function () {
-		var data = this.model.toJSON();
-		this.$el.jqmData( "url", "/notes/" + data.id );
+		var note = this.model.toJSON();
+		this.$el.jqmData( "url", "/notes/" + note.id );
 
-		this.$el.html( this.template( {
-			note: data,
-			textHelper: textHelper
-		}));
+		this.$el.html(
+			this.template({
+				note: note,
+				textHelper: textHelper
+			})
+		);
 	}
 });
 
@@ -114,13 +104,15 @@ NewNoteView = Backbone.View.extend({
 
 // Notes List View
 NotesView = Backbone.View.extend({
+	templateId: "#notes-view-template",
+
 	initialize: function () {
 		_.bindAll( this, "render", "deleteRow" );
 
 		this.collection.on( "reset", this.render );
 
 		this.$content = this.$( ".ui-content" );
-		this.template = _.template( $( "#notes-view-template" ).html() );
+		this.template = _.template( $( this.templateId ).html() );
 
 		this.render();
 	},
@@ -141,12 +133,14 @@ NotesView = Backbone.View.extend({
 	},
 
 	deleteRow: function ( e ) {
-		e.preventDefault();
 		var $row  = $( e.currentTarget ).closest( "li" ),
-			model = this.collection.get( $row.data( "id" ) );
+			id    = $row.data( "id" ),
+			model = this.collection.get( id );
 
-		console.log( $row.data( "id" ) );
+		// Destroy the data
 		model.destroy();
+		
+		// Visually remove the row
 		$row.slideUp( function () {
 			$row.remove();
 		});

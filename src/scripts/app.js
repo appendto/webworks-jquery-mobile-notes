@@ -49,6 +49,8 @@ $html.on( "pagebeforeshow", "#home", function () {
 	app.notes.fetch();
 });
 
+app.notes.fetch();
+
 $html.on( "pageinit", "#new-note", function () {
 	newNoteView = new app.NewNoteView({
 		el: this,
@@ -58,20 +60,18 @@ $html.on( "pageinit", "#new-note", function () {
 
 $html.on( "pagebeforechange", function ( e, data ) {
 	var page, url;
-	if ( typeof data.toPage === "string" ) {
+	if ( typeof data.toPage === "string" && !$.mobile.path.isEmbeddedPage( data.toPage ) ) {
 		url = $.mobile.path.parseUrl( data.toPage );
 
 		if ( url.directory === "/notes/" ) {
 			page = new app.NoteView({
 				model: app.notes.get( url.filename )
 			});
-			console.log( page );
+			page.$el.appendTo( document.body );
 			data.toPage = page.$el;
 		}
 	}
 });
-
-// app.notes.fetch();
 
 
 

@@ -53,7 +53,8 @@
 
 
 <script id="notes-view-template" type="text/html">
-	<ul data-role="listview" class="notes-display">
+	<% if ( notes.length ) { %> 
+	<ul data-role="listview" class="notes-display" <%= notes.length > 5 ? 'data-filter="true"' : "" %> >
 		<% _.each( notes, function( note ) { %>
 			<li data-id="<%= note.id %>" data-swipeurl>
 				<a href="/notes/<%= note.id %>">
@@ -62,6 +63,11 @@
 			</li>
 		<% }); %>
 	</ul>
+	<% } else { %>
+	<div class="ui-body-e ui-body">
+		<p>There are no notes yet! Click New Note to add a note!</p>
+	</div>
+	<% } %>
 </script>
 
 <script id="note-view-template" type="text/html">
