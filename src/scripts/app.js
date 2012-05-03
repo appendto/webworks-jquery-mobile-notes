@@ -68,6 +68,8 @@ $html.on( "pagebeforechange", function ( e, data ) {
 				model: app.notes.get( url.filename )
 			});
 			page.$el.appendTo( document.body );
+			
+			data.options.dataUrl = data.toPage;
 			data.toPage = page.$el;
 		}
 	}

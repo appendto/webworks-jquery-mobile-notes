@@ -43,7 +43,6 @@ NoteView = Backbone.View.extend({
 
 	render: function () {
 		var note = this.model.toJSON();
-		this.$el.jqmData( "url", "/notes/" + note.id );
 
 		this.$el.html(
 			this.template({
