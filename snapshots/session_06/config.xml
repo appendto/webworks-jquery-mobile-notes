@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:rim="http://www.blackberry.com/ns/widgets"
+        version="0.1.0.0">
+
+    <name>Notes App</name>
+    <description>A sample jQuery Mobile application.</description>
+
+    <author rim:copyright="2012"
+            email="you@yourname.com"
+            href="http://yourdomain.com">Your Name</author>
+
+    <!-- Put sites that you'll need access here -->
+    <!-- <access subdomains="true" uri="https://api.twitter.com"></access> -->
+
+    <!-- If you need to lock it to a certain orientaion -->
+    <rim:orientation mode="landscape"/>
+
+    <!-- This allows us to develop without redeploying the application -->
+    <content src="index.html"/>
+</widget>
