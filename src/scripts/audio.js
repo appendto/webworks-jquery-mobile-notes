@@ -1,25 +1,28 @@
 var audio = ( function() {
 
+	if ( !blackberry ) {
+		// Don't error in desktop browsers
+		return {};
+	}
+
 	var microphone = blackberry.media.microphone, 
 	audioDirectory = blackberry.io.dir.appDirs.shared.music.path;
 
-	function check(newfile) {
-		if(blackberry.io.file.exists(audioDirectory + "/" + newfile + ".wav")) {
-			return false;
-		} else {
-			return true;
-		}
+	function exists( filename ) {
+		return blackberry.io.file.exists( filename );
 	}
 
-	function record(filename) {
-		if(check(filename)) {
+	function record(success, error) {
+		var filename = audioDirectory + "/" + currentDate() + ".wav";
+
+		if( !exists(filename) ) {
 			try {
-				var la = microphone.record(audioDirectory + '/' + filename + ".wav", recordSuccess, recordError);
+				var la = microphone.record( filename, success, error);
 			} catch(e) {
-				console.log("error initializing Recording: " + e.message);
+				error( -1, "Problem starting recording" )
 			}
-		}else{
-			console.log("File already exists, cannot record");
+		} else {
+			error(-1, "File already exists, cannot record" );
 		}
 
 	}
@@ -40,50 +43,20 @@ var audio = ( function() {
 		}
 	}
 	
-	function currentDate(){
+	function currentDate() {
 		var date = new Date(),
 		day = date.getDay(),
 		hour = date.getHours(),
 		minute = date.getMinutes(),
 		month = date.getMonth(),
+		second = date.getSeconds(),
 		year = date.getFullYear();
-		return year + "-" + month + "-" + day + "-" + hour + "-" + minute;
-	}
-
-	function recordSuccess(data) {
-		console.log("Recording Success");		
-		store(currentDate(), data);
-	}
-
-	function recordError(error, msg) {
-		console.log("error: " + error);
-		console.log("error Message: " + msg);
-	}
-
-	function store(name, data) {
-		if(localStorage.getItem(name) === null) {
-			localStorage.setItem(name, data);
-			console.log("stored " + name);
-		} else {
-			console.log(name + " already exists!");
-		}
-
-	}
-
-	function list() {
-		var keysLen = localStorage.length, audioList = {};
-		for(var i = 0; i < keysLen; i++) {
-			audioList[i] = {
-				"name" : localStorage.key(i),
-				"file" : localStorage.getItem(localStorage.key(i))
-			};
-		}
-		return audioList;
+		return [ year, month, day, hour, minute, second ].join( "-" );
 	}
 
 	//returns an audio player element based on the name of the note you send in
-	function getAudio(name) {
-		var audioFile = localStorage.getItem(name), audioPlayer = document.createElement("audio");
+	function getAudio(filename) {
+		var audioFile = filename, audioPlayer = document.createElement("audio");
 		audioPlayer.src = audioFile;
 		audioPlayer.controls = true;
 		return audioPlayer;
@@ -93,7 +66,6 @@ var audio = ( function() {
 		record : record,
 		stop : stop,
 		pause : pause,
-		listAudio : list,
 		getAudio : getAudio
 	};
 
