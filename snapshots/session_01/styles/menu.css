@@ -1,0 +1,33 @@
+#menu {
+	position: fixed;
+	top: -80px;
+	height: 80px;
+	left: 0;
+	right: 0;
+	z-index: 1150;
+	text-align: right;
+	-webkit-transition: all linear 300ms;
+	-webkit-box-sizing: border-box;
+	-webkit-transform: translateY(0);
+}
+
+#menu-overlay {
+	background-color: rgba(0,0,0,0.0);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1100;
+	pointer-events: none;
+	-webkit-transition: background-color linear 300ms;
+}
+
+.show-menu #menu {
+	-webkit-transform: translateY(80px);
+}
+
+.show-menu #menu-overlay {
+	background-color: rgba(0,0,0,0.5);
+	pointer-events: all;
+}
