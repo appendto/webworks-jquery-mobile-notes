@@ -17,54 +17,19 @@ Note = Backbone.Model.extend({
 // Collection
 Notes = Backbone.Collection.extend({
 	localStorage: new Backbone.LocalStorage( "Notes" ),
-	model: Note,
-	parse: function ( items ) {
-		return items.reverse();
-	}
+	model: Note
 });
 
 // NoteView
 NoteView = Backbone.View.extend({
-	tagName: "div",
 
-	templateId: "#note-view-template",
-
-	attributes: {
-		"data-role": "page"
-	},
-	
-	initialize: function () {
-		// Cache the template
-		this.template = _.template( $( this.templateId ).html() );
-
-		// Render
-		this.render();
-	},
-
-	render: function () {
-		var note = this.model.toJSON();
-
-		this.$el.html(
-			this.template({
-				note: note,
-				textHelper: textHelper
-			})
-		);
-	}
 });
 
 // NoteView
 NewNoteView = Backbone.View.extend({
-	events: {
-		"click .done": "saveNote",
-		"submit form": "saveNote"
-	},
-
 	initialize: function () {
 		_.bindAll( this, "focus" );
 		this.$text = this.$( "textarea" );
-
-		this.$el.bind( "pageshow", this.focus )
 	},
 
 	focus: function () {
@@ -76,23 +41,13 @@ NewNoteView = Backbone.View.extend({
 	},
 
 	saveNote: function () {
-		var text = this.$text.val();
-
-		text = $.trim( text );
-
-		if ( text === "" ) {
-			alert( "Your note must contain content!" );
-			return;
-		}
+		var text = "sample";
 
 		this.collection.create({
 			"text": text
 		}, {
 			success: function () {
-				$.mobile.changePage( "/index.html", {
-					transition: "slideup",
-					reverse: true
-				});
+
 			},
 			error: function () {
 				alert( "There was a problem saving your note!" );
@@ -106,7 +61,7 @@ NotesView = Backbone.View.extend({
 	templateId: "#notes-view-template",
 
 	initialize: function () {
-		_.bindAll( this, "render", "deleteRow" );
+		_.bindAll( this, "render" );
 
 		this.collection.on( "reset", this.render );
 
@@ -122,27 +77,7 @@ NotesView = Backbone.View.extend({
 				.html( this.template({
 					notes: notes,
 					textHelper: textHelper
-				}))
-				.trigger( "pagecreate" );
-
-		this.$('li').swipeDelete({ 
-			click: this.deleteRow,
-			direction: 'swipeleft'
-		});
-	},
-
-	deleteRow: function ( e ) {
-		var $row  = $( e.currentTarget ).closest( "li" ),
-			id    = $row.data( "id" ),
-			model = this.collection.get( id );
-
-		// Destroy the data
-		model.destroy();
-		
-		// Visually remove the row
-		$row.slideUp( function () {
-			$row.remove();
-		});
+				}));
 	}
 });
 

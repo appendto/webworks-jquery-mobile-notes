@@ -1,49 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets"
         xmlns:rim="http://www.blackberry.com/ns/widgets"
-        version="0.9.0.1">
+        version="0.1.0.0">
 
     <name>Notes App</name>
     <description>A sample jQuery Mobile application.</description>
-    <author rim:copyright="2012" email="hello@appendto.com" href="http://appendto.com">Doug Neiner</author>
-    
-    <icon src="icon.png"/>
-    
-    <rim:loadingScreen
-        onFirstLaunch="true"
-        foregroundImage="logo.png"
-        backgroundImage="launch.png"
-        backgroundColor="#2287BA" />
 
-    <access subdomains="true" uri="http://10.0.1.20:9000">
-        <!-- The features are enabled to be used in our app -->
-        <!-- We will need to clean these up later based on what we actually need -->
-        <feature id="blackberry.app" />
-        <feature id="blackberry.app.event" />
-        <feature id="blackberry.invoke" />
-        <feature id="blackberry.invoke.BrowserArguments" />
-        <feature id="blackberry.invoke.CameraArguments" />
-        <feature id="blackberry.system" />
-        <feature id="blackberry.system.event" />
-        <feature id="blackberry.ui.dialog" />
-        <feature id="blackberry.utils" />
-        <feature id="blackberry.io.file" />
-		<feature id="blackberry.io.dir" />	
-		<feature id="blackberry.media.microphone" />
-	</access>
-
-    <rim:permissions>
-        <rim:permit>access_shared</rim:permit>
-        <rim:permit>record_audio</rim:permit>
-    </rim:permissions>
+    <author rim:copyright="2012"
+            email="you@yourname.com"
+            href="http://yourdomain.com">Your Name</author>
 
     <!-- Put sites that you'll need access here -->
     <!-- <access subdomains="true" uri="https://api.twitter.com"></access> -->
-
 
     <!-- If you need to lock it to a certain orientaion -->
     <rim:orientation mode="landscape"/>
 
     <!-- This allows us to develop without redeploying the application -->
-    <content src="http://10.0.1.20:9000/index.html"/>
+    <content src="index.html"/>
 </widget>

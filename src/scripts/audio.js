@@ -1,37 +1,17 @@
 var audio = ( function() {
 
-	if ( !blackberry ) {
+	if ( !window.blackberry ) {
 		// Don't error in desktop browsers
 		return {};
 	}
 
-	var microphone = blackberry.media.microphone, 
-	audioDirectory = blackberry.io.dir.appDirs.shared.music.path;
-
-	function exists( filename ) {
-		return blackberry.io.file.exists( filename );
-	}
-
-	function record(success, error) {
-		var filename = audioDirectory + "/" + currentDate() + ".wav";
-
-		if( !exists(filename) ) {
-			try {
-				var la = microphone.record( filename, success, error);
-			} catch(e) {
-				error( -1, "Problem starting recording" )
-			}
-		} else {
-			error(-1, "File already exists, cannot record" );
-		}
-
-	}
+	// <Add code here>
 
 	function stop() {
 		try {
 			microphone.stop();
 		} catch(e) {
-			console.log("could not stop: " + e);
+			console.log("could not stop", e);
 		}
 	}
 
@@ -39,7 +19,7 @@ var audio = ( function() {
 		try {
 			microphone.pause();
 		} catch(e) {
-			console.log("could no pause: " + e);
+			console.log("could not pause", e);
 		}
 	}
 	
