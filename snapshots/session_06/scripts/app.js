@@ -18,14 +18,14 @@ $html.on( "pageinit", "#new-note", function () {
 });
 
 $html.on( "pagebeforechange", function ( e, data ) {
+	var page, url;
 	if ( typeof data.toPage === "string" && !$.mobile.path.isEmbeddedPage( data.toPage ) ) {
-		var url = $.mobile.path.parseUrl( data.toPage );
+		url = $.mobile.path.parseUrl( data.toPage );
 
 		if ( url.directory === "/notes/" ) {
-			var model = app.notes.get( url.filename ),
-				page = new app.NoteView({
-					model: model
-				});
+			page = new app.NoteView({
+				model: app.notes.get( url.filename )
+			});
 
 			page.$el.appendTo( document.body );
 

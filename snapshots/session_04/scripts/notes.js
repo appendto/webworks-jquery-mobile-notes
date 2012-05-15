@@ -25,7 +25,7 @@ NoteView = Backbone.View.extend({
 
 });
 
-// NoteView
+// NewNoteView
 NewNoteView = Backbone.View.extend({
 	initialize: function () {
 		_.bindAll( this, "focus" );

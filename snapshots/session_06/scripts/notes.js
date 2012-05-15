@@ -38,16 +38,17 @@ NoteView = Backbone.View.extend({
 	},
 
 	render: function () {
-		var data = this.model.toJSON();
-
-		this.$el.html( this.template({
-			note: data,
-			textHelper: textHelper
-		}));
+		var note = this.model.toJSON();
+		this.$el.html(
+			this.template({
+				note: note,
+				textHelper: textHelper
+			})
+		);
 	}
 });
 
-// NoteView
+// NewNoteView
 NewNoteView = Backbone.View.extend({
 	events: {
 		"click .done": "saveNote",
@@ -58,8 +59,8 @@ NewNoteView = Backbone.View.extend({
 		_.bindAll( this, "focus", "reset" );
 		this.$text = this.$( "textarea" );
 
-		this.$el.on( "pageshow", this.focus);
 		this.$el.on( "pagebeforeshow", this.reset);
+		this.$el.on( "pageshow", this.focus);
 	},
 
 	focus: function () {
@@ -71,10 +72,12 @@ NewNoteView = Backbone.View.extend({
 	},
 
 	saveNote: function () {
-		var text = $.trim( this.$text.val() );
+		var text = this.$text.val();
+
+		text = $.trim( text );
 
 		if ( text === "" ) {
-			alert( "You must enter a note!" );
+			alert( "Please add some text." );
 			return;
 		}
 
@@ -82,7 +85,10 @@ NewNoteView = Backbone.View.extend({
 			"text": text
 		}, {
 			success: function () {
-				$.mobile.changePage( "/index.html" );
+				$.mobile.changePage( "index.html", {
+					transition: "slideup",
+					reverse: true
+				});
 			},
 			error: function () {
 				alert( "There was a problem saving your note!" );
@@ -96,19 +102,18 @@ NotesView = Backbone.View.extend({
 	templateId: "#notes-view-template",
 
 	initialize: function () {
-		_.bindAll( this, "render", "fetch" );
+		_.bindAll( this, "render" );
 
-		this.$el.bind( "pagebeforeshow", this.fetch );
 		this.collection.on( "reset", this.render );
+
+		this.$el.on( "pagebeforeshow", function () {
+			app.notes.fetch();
+		});
 
 		this.$content = this.$( ".ui-content" );
 		this.template = _.template( $( this.templateId ).html() );
 
 		this.render();
-	},
-
-	fetch: function () {
-		this.collection.fetch();
 	},
 
 	render: function () {
@@ -117,8 +122,8 @@ NotesView = Backbone.View.extend({
 				.html( this.template({
 					notes: notes,
 					textHelper: textHelper
-				}))
-				.trigger( "pagecreate" );
+				}));
+		this.$content.trigger( "pagecreate" );
 	}
 });
 
