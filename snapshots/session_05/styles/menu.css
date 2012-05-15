@@ -1,7 +1,7 @@
 #menu {
 	position: fixed;
-	top: -80px;
-	height: 80px;
+	top: -60px;
+	height: 60px;
 	left: 0;
 	right: 0;
 	z-index: 1150;
@@ -9,6 +9,10 @@
 	-webkit-transition: all linear 300ms;
 	-webkit-box-sizing: border-box;
 	-webkit-transform: translateY(0);
+}
+
+#menu .ui-btn-inner {
+	font-size: 12.5px;
 }
 
 #menu-overlay {
@@ -24,7 +28,7 @@
 }
 
 .show-menu #menu {
-	-webkit-transform: translateY(80px);
+	-webkit-transform: translateY(60px);
 }
 
 .show-menu #menu-overlay {

@@ -1,0 +1,28 @@
+<!DOCTYPE html> 
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Notes App</title>
+</head> 
+
+<body> 
+
+<div id="new-note" data-role="page">
+	<div data-theme="b" data-role="header">
+		<a data-rel="back" data-icon="delete">Cancel</a>
+		<h1>New Note</h1>
+		<a data-icon="check" class="done">Done</a>
+	</div>
+	<div data-role="content">
+		<form data-ajax="false">
+			<div data-role="fieldcontain" class="ui-hide-label">
+				<label for="note-text">Text</label>
+				<textarea id="note-text" rows="10" cols="40"></textarea>
+			</div>
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

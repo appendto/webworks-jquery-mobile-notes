@@ -1,0 +1,24 @@
+@import "../scripts/libs/jquerymobile/jquery.mobile-1.1.0.css"; 
+@import "menu.css"; 
+
+.center-actions { text-align: center; }
+.right-actions { text-align: right; }
+
+#notes-logo img {
+	height: 45px;
+}
+
+.ui-header-fixed { width: auto; }
+
+.ui-header .ui-title { font-size: 20px; }
+.ui-header .ui-btn-inner { font-size: 18px; }
+.ui-content { font-size: 18px; line-height: 24px; }
+.ui-btn-text { padding: 0 10px; }
+.ui-header .ui-btn-icon-left .ui-icon { left: 12px; }
+
+#menu {
+	top: -80px;
+	height: 80px;
+}
+#menu .ui-btn-inner { font-size: 16px; }
+.show-menu #menu { -webkit-transform: translateY(80px); }

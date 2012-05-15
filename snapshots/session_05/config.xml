@@ -13,7 +13,7 @@
     <!-- Put sites that you'll need access here -->
     <!-- <access subdomains="true" uri="https://api.twitter.com"></access> -->
 
-    <!-- If you need to lock it to a certain orientaion -->
+    <!-- If you need to lock it to a certain orientation -->
     <rim:orientation mode="landscape"/>
 
     <!-- This allows us to develop without redeploying the application -->
