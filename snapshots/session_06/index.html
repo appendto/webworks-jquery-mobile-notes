@@ -36,7 +36,7 @@
 </div>
 
 <script type="text/html" id="notes-view-template">
-	<ul data-role="listview" data-filter="true">
+	<ul data-role="listview">
 		<% _.each( notes, function( note ) { %>
 		<li><a href="/notes/<%= note.id %>"><%= textHelper( note.text ) %></a></li>
 		<% }) %>
